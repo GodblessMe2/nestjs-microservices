@@ -1,14 +1,20 @@
 import { Module } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
+import { ConfigService, ConfigModule } from '@nestjs/config';
 import { ModelDefinition, MongooseModule } from '@nestjs/mongoose';
-import { ConfigModule } from '../config/config.module';
+import * as Joi from 'joi';
+
 
 @Module({
   // for a small application
   // imports: [MongooseModule.forRoot('mongodb://localhost/sleepr')],
   imports: [
     MongooseModule.forRootAsync({
-      imports: [ConfigModule],
+      imports: [ConfigModule.forRoot({
+        isGlobal: true,
+        validationSchema: Joi.object({
+          MONGODB_URI: Joi.string().required(),
+        }),
+      })],
       useFactory: (configService: ConfigService) => ({
         uri: configService.get('MONGODB_URI'),
       }),

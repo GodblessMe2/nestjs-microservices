@@ -28,4 +28,5 @@ RUN pnpm install --prod
 
 COPY --from=development /usr/src/app/dist ./dist
 
-CMD ["node", "dist/apps/auth/main]
+CMD ["node", "dist/apps/auth/main"]
+# Expose the port the app runs on
