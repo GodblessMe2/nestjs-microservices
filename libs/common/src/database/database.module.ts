@@ -9,12 +9,6 @@ import * as Joi from 'joi';
   // imports: [MongooseModule.forRoot('mongodb://localhost/sleepr')],
   imports: [
     MongooseModule.forRootAsync({
-      imports: [ConfigModule.forRoot({
-        isGlobal: true,
-        validationSchema: Joi.object({
-          MONGODB_URI: Joi.string().required(),
-        }),
-      })],
       useFactory: (configService: ConfigService) => ({
         uri: configService.get('MONGODB_URI'),
       }),

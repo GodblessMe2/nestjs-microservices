@@ -6,6 +6,7 @@ import { UsersModule } from './users/users.module';
 import { LoggerModule } from '@app/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import * as Joi from 'joi';
+import { LocalStrategy } from './strategies/local.strategy';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import * as Joi from 'joi';
       MONGODB_URI: Joi.string().required(),
       JWT_SECRET: Joi.string().required(),
       JWT_EXPIRATION_TIME: Joi.number().default(3600),
+      PORT: Joi.number().required(),
     }),
   }), UsersModule, LoggerModule,
     JwtModule.registerAsync({
@@ -29,6 +31,6 @@ import * as Joi from 'joi';
     })
   ],
   controllers: [AuthController],
-  providers: [AuthService],
+  providers: [AuthService, LocalStrategy],
 })
 export class AuthModule {}
