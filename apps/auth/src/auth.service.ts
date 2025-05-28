@@ -3,19 +3,21 @@ import { UserDocument } from './models/user.schema';
 import { Response } from 'express';
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
+import { TokenPayload } from './interfaces/token-payload.interface';
 
 @Injectable()
 export class AuthService {
   constructor(private readonly configService: ConfigService, private readonly jwtService: JwtService) {}
   async login(user: UserDocument, response: Response ) {
-    const tokenPayload = {
+    const tokenPayload: TokenPayload = {
       userId: user._id.toHexString(),
     };
 
     const expires = new Date();
 
     expires.setSeconds(
-      expires.getSeconds() + this.configService.get('JWT_EXPIRATION'),
+      expires.getSeconds() + this.configService.get('JWT_EXPIRATION_TIME', { infer: true }) || 3600, // Default to 1 hour if not set
+      // Note: infer: true is used to ensure the value is treated as a number
     );
     const token = this.jwtService.sign(tokenPayload);
 
