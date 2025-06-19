@@ -4,11 +4,14 @@ services:
       context: .
       dockerfile: ./apps/reservations/Dockerfile
       target: development
-    command: pnpm run start:dev reservations
+    command: pnpm run start:debug reservations
     env_file:
       - ./apps/reservations/.env
     ports:
       - "3037:3037"
+      - "9229:9229"  # Debug port
+    environment:
+      - NODE_OPTIONS=--inspect=0.0.0.0:9229
     volumes:
       - .:/usr/src/app
       - /usr/src/app/node_modules
@@ -22,6 +25,19 @@ services:
       - ./apps/auth/.env
     ports:
       - "3036:3036"
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+  payments:
+    build:
+      context: .
+      dockerfile: ./apps/payments/Dockerfile
+      target: development
+    command: pnpm run start:dev payments
+    env_file:
+      - ./apps/payments/.env
+    ports:
+      - "3031:3031"
     volumes:
       - .:/usr/src/app
       - /usr/src/app/node_modules

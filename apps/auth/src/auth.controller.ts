@@ -6,6 +6,7 @@ import { AuthService } from './auth.service';
 import { Response } from 'express';
 import { MessagePattern, Payload } from '@nestjs/microservices';
 import { JwtAuthGuard } from './guards/jwt-auth.guard';
+import { log } from 'console';
 
 @Controller('auth')
 export class AuthController {
@@ -15,6 +16,7 @@ export class AuthController {
   @Post('login')
   async login(@CurrentUser() user: UserDocument,
     @Res({passthrough: true}) response: Response,) {
+    console.log('User logged in:', user);
     await this.authService.login(user, response);
     response.send(user);
   }
