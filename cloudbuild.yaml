@@ -1,0 +1,24 @@
+steps:
+  # Auth Service
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'europe-west2-docker.pkg.dev/sleepr-463812/auth/auth', '-f', 'apps/auth/Dockerfile', '.']
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'europe-west2-docker.pkg.dev/sleepr-463812/auth/auth']
+
+  # Reservations Service
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'europe-west2-docker.pkg.dev/sleepr-463812/reservations/reservations', '-f', 'apps/reservations/Dockerfile', '.']
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'europe-west2-docker.pkg.dev/sleepr-463812/reservations/reservations']
+
+  # Payments Service
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'europe-west2-docker.pkg.dev/sleepr-463812/payments/payments', '-f', 'apps/payments/Dockerfile', '.']
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'europe-west2-docker.pkg.dev/sleepr-463812/payments/payments']
+
+  # Notifications Service
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'europe-west12-docker.pkg.dev/sleepr-463812/notifications/notifications', '-f', 'apps/notifications/Dockerfile', '.']
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'europe-west2-docker.pkg.dev/sleepr-463812/notifications/notifications']

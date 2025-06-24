@@ -22,7 +22,7 @@ export class ReservationsController {
   async create(@Body() createReservationDto: CreateReservationDto, @CurrentUser() user: UserDto) {
     // console.log({createReservationDto})
     // Optionally, you can log the user or perform additional checks
-   return this.reservationsService.create(createReservationDto, user._id);
+   return this.reservationsService.create(createReservationDto, user);
 
   }
 

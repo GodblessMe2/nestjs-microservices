@@ -13,9 +13,9 @@ export class ReservationsService {
     @Inject(PAYMENT_SERVICE) private readonly paymentsService: ClientProxy
   ) {}
 
-  async create(createReservationDto: CreateReservationDto, userId: string) {
-    console.log({ createReservationDto, userId });
-    return this.paymentsService.send('create_charge', createReservationDto.charge).pipe(map((res) => {
+  async create(createReservationDto: CreateReservationDto, { email, _id: userId}) {
+
+    return this.paymentsService.send('create_charge', {...createReservationDto.charge, email}).pipe(map((res) => {
     return this.reservationsRepository.create({
         ...createReservationDto,
         timestamp: new Date(),

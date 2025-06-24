@@ -2,8 +2,7 @@ import { Controller, Body, Get, UseGuards } from '@nestjs/common';
 import { CreateUserDto } from '../dto/create-user.dto';
 import { UsersService } from './users.service';
 import { Post } from '@nestjs/common';
-import { UserDocument } from '../models/user.schema';
-import { CurrentUser } from '@app/common';
+import { CurrentUser, UserDocument } from '@app/common';
 import { JwtAuthGuard } from '../guards/jwt-auth.guard';
 
 
