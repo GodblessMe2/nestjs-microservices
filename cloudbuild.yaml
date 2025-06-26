@@ -24,4 +24,4 @@ steps:
   - name: 'gcr.io/cloud-builders/docker'
     args: ['build', '-t', 'europe-west12-docker.pkg.dev/sleepr-463812/notifications/notifications', '-f', 'apps/notifications/Dockerfile', '.']
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['push', 'europe-west2-docker.pkg.dev/sleepr-463812/notifications/notifications']
+    args: ['push', 'europe-west12-docker.pkg.dev/sleepr-463812/notifications/notifications']
