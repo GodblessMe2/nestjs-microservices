@@ -15,7 +15,8 @@ export class AuthController {
   @Post('login')
   async login(@CurrentUser() user: UserDocument,
     @Res({passthrough: true}) response: Response,) {
-
+    log('User logged in:', user);
+    // Set the JWT token in the response cookie
     await this.authService.login(user, response);
     response.send(user);
   }
