@@ -4,24 +4,24 @@ options:
 steps:
   # Auth Service
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t', 'europe-west2-docker.pkg.dev/sleepr-463812/auth/auth', '-f', 'apps/auth/Dockerfile', '.']
+    args: ['build', '-t', 'europe-west2-docker.pkg.dev//sleepr-464709/auth/auth', '-f', 'apps/auth/Dockerfile', '.']
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['push', 'europe-west2-docker.pkg.dev/sleepr-463812/auth/auth']
+    args: ['push', 'europe-west2-docker.pkg.dev//sleepr-464709/auth/auth']
 
   # Reservations Service
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t', 'europe-west2-docker.pkg.dev/sleepr-463812/reservations/reservations', '-f', 'apps/reservations/Dockerfile', '.']
+    args: ['build', '-t', 'europe-west2-docker.pkg.dev//sleepr-464709/reservations/reservations', '-f', 'apps/reservations/Dockerfile', '.']
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['push', 'europe-west2-docker.pkg.dev/sleepr-463812/reservations/reservations']
+    args: ['push', 'europe-west2-docker.pkg.dev//sleepr-464709/reservations/reservations']
 
   # Payments Service
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t', 'europe-west2-docker.pkg.dev/sleepr-463812/payments/payments', '-f', 'apps/payments/Dockerfile', '.']
+    args: ['build', '-t', 'europe-west2-docker.pkg.dev//sleepr-464709/payments/payments', '-f', 'apps/payments/Dockerfile', '.']
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['push', 'europe-west2-docker.pkg.dev/sleepr-463812/payments/payments']
+    args: ['push', 'europe-west2-docker.pkg.dev//sleepr-464709/payments/payments']
 
   # Notifications Service
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t', 'europe-west12-docker.pkg.dev/sleepr-463812/notifications/notifications', '-f', 'apps/notifications/Dockerfile', '.']
+    args: ['build', '-t', 'europe-west2-docker.pkg.dev//sleepr-464709/notifications/notifications', '-f', 'apps/notifications/Dockerfile', '.']
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['push', 'europe-west12-docker.pkg.dev/sleepr-463812/notifications/notifications']
+    args: ['push', 'europe-west2-docker.pkg.dev//sleepr-464709/notifications/notifications']
