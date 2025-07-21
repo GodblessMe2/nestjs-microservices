@@ -1,5 +1,6 @@
 import { Injectable, UnauthorizedException, UnprocessableEntityException } from '@nestjs/common';
-import * as bcrypt from 'bcrypt'
+// import * as bcrypt from 'bcrypt'
+import {hash, compare} from 'bcryptjs';
 import { UsersRepository } from './users.repository';
 import { CreateUserDto } from '../dto/create-user.dto';
 import { GetUserDto } from '../dto/get-user.dto';
@@ -15,7 +16,7 @@ export class UsersService {
    */
   async create(createUserDto: CreateUserDto) {
     await this.validateCreateUserDto(createUserDto);
-    return this.usersRepository.create({...createUserDto, password: await bcrypt.hash(createUserDto.password, 10)});
+    return this.usersRepository.create({...createUserDto, password: await hash(createUserDto.password, 10)});
   }
 
   private async validateCreateUserDto(createUserDto: CreateUserDto) {
@@ -29,7 +30,7 @@ export class UsersService {
 
   async verifyUser(email: string, password: string) {
     const user = await this.usersRepository.findOne({ email });
-    const isPasswordValid = await bcrypt.compare(password, user.password);
+    const isPasswordValid = await compare(password, user.password);
     if (!isPasswordValid) {
       throw new UnauthorizedException("Invalid email or password");
     }

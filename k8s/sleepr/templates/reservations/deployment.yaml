@@ -11,10 +11,15 @@ spec:
       app: reservations
   template:
     metadata:
-      creationTimestamp: null
       labels:
         app: reservations
     spec:
       containers:
-      - image: europe-west2-docker.pkg.dev/sleepr-463812/reservations/reservations
+      - image: europe-west2-docker.pkg.dev/sleepr-464709/reservations/production
         name: reservations
+        env:
+        - name: MONGODB_URI
+          valueFrom:
+            secretKeyRef:
+              name: mongodb
+              key: connectionString

@@ -1,7 +1,6 @@
 import { Module } from '@nestjs/common';
-import { ConfigService, ConfigModule } from '@nestjs/config';
+import { ConfigService } from '@nestjs/config';
 import { ModelDefinition, MongooseModule } from '@nestjs/mongoose';
-import * as Joi from 'joi';
 
 
 @Module({
