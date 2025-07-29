@@ -17,9 +17,29 @@ spec:
       containers:
       - image: europe-west2-docker.pkg.dev/sleepr-464709/reservations/production
         name: reservations
+        resources:
+          limits:
+            memory: "1Gi"
+            ephemeral-storage: "1Gi"
+          requests:
+            cpu: "100m"
+            memory: "512Mi"
+            ephemeral-storage: "500Mi"
         env:
         - name: MONGODB_URI
           valueFrom:
             secretKeyRef:
               name: mongodb
               key: connectionString
+        - name: AUTH_SERVICE_HOST
+          value: auth-tcp
+        - name: AUTH_SERVICE_PORT
+          value: '3002'
+        - name: PAYMENT_SERVICE_HOST
+          value: payments
+        - name: PAYMENT_SERVICE_PORT
+          value: '3001'
+        - name: PORT
+          value: '3004'
+        ports:
+        - containerPort: 3004
